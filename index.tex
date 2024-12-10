@@ -138,11 +138,19 @@ from the Excel file that display the tree cover data: Country tree cover
 loss and Subnational 1 tree cover loss.
 
 The following are the descriptions of each sheet from the GFW data:
-Country tree cover loss: Hectares of tree cover loss at a national
-level, between 2001-2023, categorized by percent canopy cover in 2000.
-Subnational 1 tree cover loss: Hectares of tree cover loss at the first
-sub-national level, between 2001-2023, categorized by percent canopy
-cover in 2000.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Country tree cover loss: Hectares of tree cover loss at a
+  national level, between 2001-2023, categorized by percent canopy cover
+  in 2000.}
+\item
+  \emph{Subnational 1 tree cover loss: Hectares of tree cover loss at
+  the first sub-national level, between 2001-2023, categorized by
+  percent canopy cover in 2000.}
+\end{enumerate}
 
 Note: Canopy cover (CC) is the percentage of ground that individual tree
 crowns cover. This is measured based on the vertical projection of the
@@ -155,9 +163,18 @@ allows sunlight to reach plants that may grow closer to the ground
 \subsection{Research Question}\label{research-question}
 
 From examining the sheets, I developed two research questions, which
-are: *** 1. What are the magnitudes of tree cover loss per year in
-Indonesia from 2001 to 2023?*** *** 2. What are the magnitudes of tree
-cover loss per year in each province from 2001 to 2023?***
+are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{What are the magnitudes of tree cover loss per year in
+  Indonesia from 2001 to 2023?}
+\item
+  \textbf{What are the magnitudes of tree cover loss per year in each
+  province from 2001 to 2023?}
+\end{enumerate}
 
 \subsection{Data Preparation}\label{data-preparation}
 
@@ -175,7 +192,7 @@ filtered the tree cover loss numbers within this threshold for the
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"reshape2"}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
 
-\DocumentationTok{\#\# install packages to make scatter plot) \#\#}
+\DocumentationTok{\#\# install packages to make scatter plot \#\#}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"RColorBrewer"}\NormalTok{)}
 
@@ -186,7 +203,7 @@ filtered the tree cover loss numbers within this threshold for the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#set directory \% load the packages}
+\CommentTok{\#set directory \& load the readxl to import Excel files}
 \FunctionTok{library}\NormalTok{(here)}
 \FunctionTok{library}\NormalTok{(readxl)}
 
@@ -406,8 +423,8 @@ filtered the tree cover loss numbers within this threshold for the
 
 \subsubsection{Question statement 1}\label{question-statement-1}
 
-*** What are the magnitudes of tree cover loss per year in Indonesia
-from 2001 to 2023?***
+\textbf{What are the magnitudes of tree cover loss per year in Indonesia
+from 2001 to 2023?}
 
 I use a scatter plot to examine and compare the magnitude of tree cover
 loss according to the canopy cover threshold. I decided to divide the
@@ -416,13 +433,13 @@ customised colors for each category.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#plotting the country data first using ggplot}
+\CommentTok{\#load ggplot to plot the Country data  }
 \FunctionTok{library}\NormalTok{(ggplot2)}
 
-\CommentTok{\#load RColorBrewer to allow color customisation}
+\CommentTok{\#load RColorBrewer to set color customisation}
 \FunctionTok{library}\NormalTok{(RColorBrewer)}
 
-\CommentTok{\#choose the colors fo the scatterplot}
+\CommentTok{\#choose the colors for the scatter plot}
 \NormalTok{ylgn\_colors }\OtherTok{\textless{}{-}} \FunctionTok{brewer.pal}\NormalTok{(}\DecValTok{9}\NormalTok{, }\StringTok{"YlGn"}\NormalTok{)}
 \NormalTok{selected\_green }\OtherTok{\textless{}{-}}\NormalTok{ ylgn\_colors[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{9}\NormalTok{] }\CommentTok{\# I want to use these shades only}
 
@@ -431,7 +448,7 @@ customised colors for each category.
                                 \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ year\_tc\_loss, }\AttributeTok{y =}\NormalTok{ tc\_loss, }
                                     \AttributeTok{color =}\NormalTok{ threshold))}
 
-\CommentTok{\#add the details and create customisation}
+\CommentTok{\#add details and customisation}
 \NormalTok{country\_tcloss\_plot }\SpecialCharTok{+} 
   \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Year"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Tree Cover Loss (ha)"}\NormalTok{,}
@@ -458,6 +475,7 @@ customised colors for each category.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\#make a folder called \textquotesingle{}Figures\textquotesingle{} and save the scatter plot in JPEG}
 \FunctionTok{dir.create}\NormalTok{(}\StringTok{"Figures"}\NormalTok{)}
 \FunctionTok{ggsave}\NormalTok{(}\AttributeTok{filename =} \StringTok{"Figures/country\_tc\_loss\_figure.jpg"}\NormalTok{)}
 \end{Highlighting}
@@ -475,8 +493,8 @@ a gradual decrease until 2022, after which there was a surge of loss in
 
 \subsubsection{Question statement 2}\label{question-statement-2}
 
-*** What are the magnitudes of tree cover loss per year in each province
-from 2001 to 2023?***
+\textbf{What are the magnitudes of tree cover loss per year in each
+province from 2001 to 2023?}
 
 I chose to create a line graph where each line corresponds to a province
 in Indonesia. However, the presence of 33 provinces may result in
@@ -489,6 +507,7 @@ once.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\#load plotly to plot the Subnational 1 data  }
 \FunctionTok{library}\NormalTok{(plotly)}
 
 \CommentTok{\#make the canvas}
@@ -498,7 +517,7 @@ once.
               \StringTok{"\textless{}br\textgreater{}Tree Cover Loss: "}\NormalTok{, tc\_loss, }
               \StringTok{"\textless{}br\textgreater{}Region: "}\NormalTok{, subnational1)))  }
 
-\CommentTok{\#add the details and create customisation}
+\CommentTok{\#add details and customisation}
 \NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ subnational\_tcloss\_plot }\SpecialCharTok{+} \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Year"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Tree Cover Loss (ha)"}\NormalTok{,}
        \AttributeTok{title =} \StringTok{"Tree Cover Loss Indonesia by Province (2001{-}2023)"}\NormalTok{,}
@@ -513,6 +532,7 @@ once.
          \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{family =} \StringTok{"Times"}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{),}
          \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{family =} \StringTok{"Times"}\NormalTok{, }\AttributeTok{size =} \DecValTok{8}\NormalTok{)))}
 
+\CommentTok{\#save the graph in JPEG in \textquotesingle{}Figures\textquotesingle{}}
 \FunctionTok{ggsave}\NormalTok{(}\AttributeTok{filename =} \StringTok{"Figures/subnational\_figure1.jpg"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ p)}
 
 
@@ -520,6 +540,7 @@ once.
 \NormalTok{interactive\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplotly}\NormalTok{(p, }\AttributeTok{tooltip =} \StringTok{"text"}\NormalTok{)}
 \NormalTok{interactive\_plot}
 
+\CommentTok{\#load htmlwidgets to save interactive\_plot in \textquotesingle{}Figures\textquotesingle{}}
 \FunctionTok{library}\NormalTok{(htmlwidgets)}
 \FunctionTok{saveWidget}\NormalTok{(interactive\_plot, }\StringTok{"Figures/subnational\_tcloss\_plot.html"}\NormalTok{)}
 \end{Highlighting}
